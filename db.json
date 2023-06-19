@@ -1,0 +1,34 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Homem de ferro",
+      "idade": 35,
+      "perfil": "diretor"
+    },
+    {
+      "id": 2,
+      "nome": "Thor",
+      "idade": 155,
+      "perfil": "adm"
+    },
+    {
+      "id": 3,
+      "nome": "Hulk",
+      "idade": 50,
+      "perfil": "consultor"
+    },
+    {
+      "id": 4,
+      "nome": "Homem Aranha",
+      "idade": 18,
+      "perfil": "consultor"
+    },
+    {
+      "id": 5,
+      "nome": "Homem formiga",
+      "idade": "44",
+      "perfil": "adm"
+    }
+  ]
+}

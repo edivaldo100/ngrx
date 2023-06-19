@@ -1,0 +1,21 @@
+<p>listar-usuarios works!</p>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Nome</td>
+            <td>Idade</td>
+            <td>Perfil</td>
+            <td>Ação</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of listaUsuarios">
+            <td>{{ row.id }}</td>
+            <td>{{ row.nome }}</td>
+            <td>{{ row.idade }}</td>
+            <td>{{ row.perfil }}</td>
+            <td><button class="btn btn-primary">Editar</button></td>
+        </tr>
+    </tbody>
+</table>
