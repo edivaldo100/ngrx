@@ -37,7 +37,7 @@ export const LoadUsuariosSucess = createAction(
 
 export const LoadUsuariosFail = createAction(
     usuariosTypeAction.LOAD_USUARIOS_FAIL,
-    props<{erro: string }>()
+    props<{error: string }>()
 );
 
 //Load Usuario
@@ -53,7 +53,7 @@ export const LoadUsuarioSucess = createAction(
 
 export const LoadUsuarioFail = createAction(
     usuariosTypeAction.LOAD_USUARIO_FAIL,
-    props<{erro: string }>()
+    props<{error: string }>()
 );
 
 //Create Usuario
@@ -69,7 +69,7 @@ export const CreateUsuarioSucess = createAction(
 
 export const CreateUsuarioFail = createAction(
     usuariosTypeAction.CREATE_USUARIO_FAIL,
-    props<{erro: string }>()
+    props<{error: string }>()
 );
 
 //Update Usuario
@@ -85,7 +85,7 @@ export const UpdateUsuarioSucess = createAction(
 
 export const UpdateUsuarioFail = createAction(
     usuariosTypeAction.UPDATE_USUARIO_FAIL,
-    props<{erro: string }>()
+    props<{error: string }>()
 );
 
 //Delete Usuario
@@ -101,5 +101,5 @@ export const DeleteUsuarioSucess = createAction(
 
 export const DeleteUsuarioFail = createAction(
     usuariosTypeAction.DELETE_USUARIO_FAIL,
-    props<{erro: string }>()
+    props<{error: string }>()
 );
