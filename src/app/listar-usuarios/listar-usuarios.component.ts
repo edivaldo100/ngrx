@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UsuarioModel } from '../Models/UsuarioModel';
-import { UsuariosService } from '../Repository/UsuariosService';
+import { AppState } from '../Store/app.state';
+
+import * as fromUsuariosAction from '../Store/usuarios/usuarios.actions';
+import * as fromUsuariosSelector from '../Store/usuarios/usuarios.reducer';
+
+
 
 @Component({
   selector: 'app-listar-usuarios',
@@ -11,16 +17,51 @@ import { UsuariosService } from '../Repository/UsuariosService';
 export class ListarUsuariosComponent implements OnInit {
   listaUsuarios: UsuarioModel[] = [];
 
-  constructor(private usuariosService: UsuariosService) {
+  constructor(
+    //private usuariosService: UsuariosService - remove pois vamos pela store
+    private store: Store<AppState>
+    ) {
 
   }
 
   ngOnInit(): void {
 
-    this.usuariosService.getUsuarios().subscribe((usuarios: UsuarioModel[]) => {
-      this.listaUsuarios = usuarios;
-    });
+    //removendo o acesso ao service pois não preciso mais dele, por que vou acessa pela store
+    // this.usuariosService.getUsuarios().subscribe((usuarios: UsuarioModel[]) => {
+    //   this.listaUsuarios = usuarios;
+    // });
+
+    /**
+     * implementar o acesso do componente a action
+     */
+    this.store.dispatch(fromUsuariosAction.LoadUsuarios())
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

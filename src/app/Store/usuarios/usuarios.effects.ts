@@ -1,12 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Actions } from "@ngrx/effects";
-import { createEffect, ofType } from "@ngrx/effects/src";
-import { of } from "rxjs";
-import { catchError } from "rxjs/internal/operators/catchError";
-import { exhaustMap } from "rxjs/internal/operators/exhaustMap";
-import { map } from "rxjs/internal/operators/map";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { catchError, exhaustMap, map, of } from "rxjs";
 import { UsuariosService } from "src/app/Repository/UsuariosService";
-import * as fromUsuariosAtion from "./usuarios.actions"
+
+import * as fromUsuariosAction from "./usuarios.actions";
 
 @Injectable()
 export class UsuariosEffects {
@@ -25,7 +22,7 @@ export class UsuariosEffects {
     loadUsuarios$ = createEffect(
         () =>
             this.actions$.pipe( //captura a ação que esta sendo executada
-                ofType(fromUsuariosAtion.usuariosTypeAction.LOAD_USUARIOS),//tipo de ação e seu tipo de retorno - action que ira ser acapturada
+                ofType(fromUsuariosAction.usuariosTypeAction.LOAD_USUARIOS),//tipo de ação e seu tipo de retorno - action que ira ser acapturada
                 exhaustMap(() => this.usuariosService.getUsuarios()//acesso ao service -. quero q me retorne a lista de users
                     /**
                      * ao ir no service o retorno pode ser sucesso ou erro 
@@ -33,8 +30,8 @@ export class UsuariosEffects {
                      */
                     .pipe(
                         map(payload =>
-                            fromUsuariosAtion.LoadUsuariosSucess({ payload }),//retorno sucesso com os dados
-                            catchError(error => of(fromUsuariosAtion.LoadUsuariosFail({ error }))))//erro
+                            fromUsuariosAction.LoadUsuariosSucess({ payload }),//retorno sucesso com os dados
+                            catchError(error => of(fromUsuariosAction.LoadUsuariosFail({ error }))))//erro
                     ))
             )
     )
@@ -42,12 +39,12 @@ export class UsuariosEffects {
     loadUsuario$ = createEffect(
         () =>
             this.actions$.pipe(
-                ofType(fromUsuariosAtion.usuariosTypeAction.LOAD_USUARIO),
+                ofType(fromUsuariosAction.usuariosTypeAction.LOAD_USUARIO),
                 exhaustMap((record: any) => this.usuariosService.getUsuario(record.payload)
                     .pipe(
                         map(payload =>
-                            fromUsuariosAtion.LoadUsuarioSucess({ payload }),
-                            catchError(error => of(fromUsuariosAtion.LoadUsuarioFail({ error }))))
+                            fromUsuariosAction.LoadUsuarioSucess({ payload }),
+                            catchError(error => of(fromUsuariosAction.LoadUsuarioFail({ error }))))
                     ))
             )
     )
@@ -55,12 +52,12 @@ export class UsuariosEffects {
     createUsuario$ = createEffect(
         () =>
             this.actions$.pipe(
-                ofType(fromUsuariosAtion.usuariosTypeAction.CREATE_USUARIO),
+                ofType(fromUsuariosAction.usuariosTypeAction.CREATE_USUARIO),
                 exhaustMap((record: any) => this.usuariosService.addUsuario(record.payload)
                     .pipe(
                         map(payload =>
-                            fromUsuariosAtion.CreateUsuarioSucess({ payload }),
-                            catchError(error => of(fromUsuariosAtion.CreateUsuarioFail({ error }))))
+                            fromUsuariosAction.CreateUsuarioSucess({ payload }),
+                            catchError(error => of(fromUsuariosAction.CreateUsuarioFail({ error }))))
                     ))
             )
     )
@@ -68,12 +65,12 @@ export class UsuariosEffects {
     updateUsuario$ = createEffect(
         () =>
             this.actions$.pipe(
-                ofType(fromUsuariosAtion.usuariosTypeAction.UPDATE_USUARIO),
+                ofType(fromUsuariosAction.usuariosTypeAction.UPDATE_USUARIO),
                 exhaustMap((record: any) => this.usuariosService.updateUsuario(record.payload)
                     .pipe(
                         map(payload =>
-                            fromUsuariosAtion.UpdateUsuario({ payload }),
-                            catchError(error => of(fromUsuariosAtion.UpdateUsuarioFail({ error }))))
+                            fromUsuariosAction.UpdateUsuario({ payload }),
+                            catchError(error => of(fromUsuariosAction.UpdateUsuarioFail({ error }))))
                     ))
             )
     )
@@ -81,12 +78,12 @@ export class UsuariosEffects {
     deleteUsuario$ = createEffect(
         () =>
             this.actions$.pipe(
-                ofType(fromUsuariosAtion.usuariosTypeAction.DELETE_USUARIO),
+                ofType(fromUsuariosAction.usuariosTypeAction.DELETE_USUARIO),
                 exhaustMap((record: any) => this.usuariosService.deleteUsuario(record.payload)
                     .pipe(
                         map(() =>
-                            fromUsuariosAtion.DeleteUsuarioSucess({ payload: record.payload }),
-                            catchError(error => of(fromUsuariosAtion.UpdateUsuarioFail({ error }))))
+                        fromUsuariosAction.DeleteUsuarioSucess({ payload: record.payload }),
+                            catchError(error => of(fromUsuariosAction.UpdateUsuarioFail({ error }))))
                     ))
             )
     )

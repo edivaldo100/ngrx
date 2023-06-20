@@ -1,11 +1,6 @@
+import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { UsuarioModel } from "src/app/Models/UsuarioModel";
-import { Action, createReducer, on } from "@ngrx/store"
-import * as fromUsuariosAction from "../usuarios/usuarios.actions"
-import { state } from "@angular/animations";
-import { filter } from "rxjs";
-import { createFeatureSelector, createSelector } from "@ngrx/store/src";
-
-
+import * as fromUsuariosAction from "./usuarios.actions"
 
 
 /**
@@ -25,9 +20,6 @@ export const initialState: UsuariosState = {
     usuario: null,
     error: ''
 }
-
-
-
 
 const _usuariosReducer = createReducer(
     initialState,

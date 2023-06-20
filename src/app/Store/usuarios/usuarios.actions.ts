@@ -27,7 +27,7 @@ export const enum usuariosTypeAction{
 
 //Load Usuarios
 export const LoadUsuarios = createAction(
-    usuariosTypeAction.LOAD_USUARIO
+    usuariosTypeAction.LOAD_USUARIOS
 );
 
 export const LoadUsuariosSucess = createAction(
