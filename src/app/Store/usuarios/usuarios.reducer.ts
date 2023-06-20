@@ -3,6 +3,7 @@ import { Action, createReducer, on } from "@ngrx/store"
 import * as fromUsuariosAction from "../usuarios/usuarios.actions"
 import { state } from "@angular/animations";
 import { filter } from "rxjs";
+import { createFeatureSelector, createSelector } from "@ngrx/store/src";
 
 
 
@@ -80,13 +81,9 @@ const _usuariosReducer = createReducer(
         ...state, 
         usuarios: [...state.usuarios].filter((filter)=>filter.id != payload), 
         error: '' })),
-        
+
     on(fromUsuariosAction.DeleteUsuarioFail, (state, { error }) => ({ ...state, error: error })),
 )
-
-
-
-
 
 /**
  * Função do reducer
@@ -94,3 +91,33 @@ const _usuariosReducer = createReducer(
 export function usuariosReducer(state = initialState, action: Action) {
     return _usuariosReducer(state, action);
 }
+
+// SELECTOR
+//chave de acesso ao estado da app na memoria
+const getUsuariosFeatureState = createFeatureSelector<UsuariosState>(
+    'usuarios'
+)
+
+//busco a listagem mais atual de usuarios
+export const getUsuarios = createSelector(
+    getUsuariosFeatureState,
+    (state: UsuariosState) => state.usuarios
+)
+
+//busco a listagem mais atual de usuarios
+export const getUsuariosErro = createSelector(
+    getUsuariosFeatureState,
+    (state: UsuariosState) => state.error
+)
+
+//busco uma lista so de usuarios adm
+export const getUsuariosAdm = createSelector(
+    getUsuariosFeatureState,
+    (state: UsuariosState) => state.usuarios.filter((filter)=> filter.perfil == 'adm')
+)
+
+//busco uma lista so de usuarios com idade maior q 50
+export const getUsuariosMaiorQue50 = createSelector(
+    getUsuariosFeatureState,
+    (state: UsuariosState) => state.usuarios.filter((filter)=> filter.idade>= 50)
+)
